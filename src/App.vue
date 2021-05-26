@@ -83,4 +83,7 @@ export default {
   color: #2c3e50;
   background-color: rgb(184, 73, 73);
 }
+html{
+  background-color: rgb(184, 73, 73) !important;
+}
 </style>
