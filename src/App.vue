@@ -67,7 +67,7 @@ export default {
   computed:{
     filteredPoke: function(){
       return this.pokemons.filter((pokemon)=>{
-        return pokemon.name.match(this.keyword);
+        return pokemon.name.match(this.keyword.toLowerCase());
       })
     }
   }
