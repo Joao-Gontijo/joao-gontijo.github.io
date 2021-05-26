@@ -2,10 +2,11 @@
   <div id="app">
     
     <div class="column">
+      <div class="column is-one-quarter">
       <figure >
         <img src="./assets/pokemon-logo.png">
       </figure>
-      
+      </div>
       <hr>
       <h4>Pokédex - João Gontijo</h4>
       <input class="input is-rounded mt-4" type="text" placeholder="Buscar Pokémon pelo nome" v-model="keyword">
