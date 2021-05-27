@@ -1,16 +1,18 @@
 <template>
     <div class="mt-4 ">
         <div class="card" :style="{backgroundColor: backgroundcolor}" style="background: linear-gradient()">
-            <div class="card-image">
+            <div class="card-image" >
                 <figure>
-                    <img :src="pokemonImg" style="margin-left:auto; margin-right:auto; padding-top: 5px" class="image is-128x128" alt="Placeholder image">
+                    <div v-if="!pokemonImg" class="loader"></div>
+                    <img v-else :src="pokemonImg" style="margin-left:auto; margin-right:auto; padding-top: 5px" class="image is-128x128" alt="Placeholder image">
                 </figure>
             </div>
 
             <div class="card-content">
                 <div class="media" v-bind="mudarCorTipo()">
                 <div class="media-content">
-                    <p class="title is-4">{{pokemon.dexNumber}} - {{name | upper}}</p>
+                    <progress v-if="!pokemon.dexNumber" class="progress is-small is-primary" max="100">15%</progress>
+                    <p v-else class="title is-4">{{pokemon.dexNumber}} - {{name | upper}}</p>
                     <button id="btnTipo"  :style="{backgroundColor: backgroundcolor}" class="button">
                         <p class="subtitle is-6">{{pokemon.type1}}</p></button>
                     <button id="btnTipo" :style="{backgroundColor: backgroundcolor2}" class="button" v-if="pokemon.type2">
@@ -96,7 +98,7 @@ export default {
                 frontShiny: '',
                 backShiny: '',
                 description: '',
-                dexNumber: Number,
+                dexNumber: '',
                 generation: ''
             },
             tiposCor: {
@@ -170,11 +172,31 @@ export default {
 .column-wrapper{
     column-count: 4;
 }
- *:first-letter{
-     text-transform: capitalize;
- }
- #btnTipo{
+*:first-letter{
+    text-transform: capitalize;
+}
+#btnTipo{
     border: 2px solid black; 
     pointer-events: none;
- }
+}
+.subtitle{
+    color: whitesmoke !important;
+}
+.loader {
+    border: 8px solid #f3f3f3 !important; /* Light grey */
+    border-top: 8px solid #3498db !important; /* Blue */
+    border-radius: 50%;
+    width: 120px !important;
+    height: 120px !important;
+    animation: spin 2s linear infinite;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block !important; 
+    margin-top: 15px !important;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>

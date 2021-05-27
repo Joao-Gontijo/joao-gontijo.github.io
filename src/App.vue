@@ -39,18 +39,17 @@ export default {
     }
   },
   created: function(){ //assim que a requisição acabar, vai passar os dados para a função
-    this.debounceName = debounce(this.checkName, 1000); //tempo para fazer a requisição do nome do pokemon quando digitado
     axios.get("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0").then(res => {
       this.pokemons = res.data.results;
       this.filteredPokemons = res.data.results;
-    })
+    });
+    this.debounceName = debounce(this.checkName, 1000); //tempo para fazer a requisição do nome do pokemon quando digitado
   },
   components:{
     Pokemon
   },
   methods:{
     checkName(){
-      console.log(`Checking name: ${this.keyword}`);
       this.filteredPokemons = this.pokemons;
       if(this.keyword == '' || this.busca == ' '){
         this.filteredPokemons = this.pokemons;
@@ -87,4 +86,5 @@ export default {
 html{
   background-color: rgb(184, 73, 73) !important;
 }
+
 </style>
