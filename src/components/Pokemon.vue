@@ -1,6 +1,6 @@
 <template>
     <div class="mt-4 ">
-        <div class="card" :style="{backgroundColor: backgroundcolor}" style="background: linear-gradient()">
+        <div class="card" :style="{backgroundColor: backgroundcolor}">
             <div class="card-image" >
                 <figure>
                     <div v-if="!pokemonImg" class="loader"></div>
@@ -38,7 +38,7 @@
                             {{pokemon.description}}
                         </section>
                         <footer class="modal-card-foot" :style="{backgroundColor: backgroundcolor}">
-                        <button class="button" v-on:click="showEntry = false">Cancel</button>
+                        <button class="button" v-on:click="showEntry = false">Close</button>
                         </footer>
                     </div>
                 </div>
@@ -181,6 +181,7 @@ export default {
 }
 .subtitle{
     color: whitesmoke !important;
+    text-shadow: 1px 1px 3px black !important;
 }
 .loader {
     border: 8px solid #f3f3f3 !important; /* Light grey */

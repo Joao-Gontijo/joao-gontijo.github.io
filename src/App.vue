@@ -12,9 +12,6 @@
       <input class="input is-rounded mt-4" type="text" placeholder="Buscar Pokémon pelo nome" v-model="keyword">
       <button class="button is-fullwidth is-success mt-4" @click="checkName">Buscar</button>
       <div class="columns  is-multiline">
-      <!--<div class="column is-one-quarter" v-for="(poke) in filteredPokemons" :key="poke.name">
-        <Pokemon :name="poke.name" :url="poke.url" :num="poke.id+1"/>
-      </div>-->
       <div class="column is-one-quarter" v-for="pokemon in filteredPoke" :key="pokemon.url">
         <Pokemon :name="pokemon.name" :url="pokemon.url" :num="pokemon.id+1"/>  
       </div>
