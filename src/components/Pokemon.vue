@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="content">
-                    <button class="button is-fullwidth" @click="showEntry = true">Entries</button>
+                    <button class="button is-fullwidth" @click="showEntry = true">Entry</button>
                 </div>
                 <div class="modal" v-bind:class="{'is-active': showEntry}">
                     <div class="modal-background" v-on:click="showEntry = false"></div>
@@ -35,7 +35,23 @@
                                 <img :src="currentImg" @mouseover="mudarSprite" @mouseleave="mudarSprite" alt="Placeholder image">
                                 <img :src="currentShiny" @mouseover="mudarSpriteShiny" @mouseleave="mudarSpriteShiny" alt="Placeholder image">
                             </figure>
+                            <div class="column">
                             {{pokemon.description}}
+                            </div>
+                            <div class="column">
+                            <table class="table is-bordered">
+                                <tr>
+                                    <th v-for="index in pokemon.base_stats_name" :key="index">
+                                        {{index}}
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td v-for="(base_stats, key) in pokemon.base_stats" :key="key">
+                                        {{base_stats}}
+                                    </td>
+                                </tr>
+                            </table>
+                            </div>
                         </section>
                         <footer class="modal-card-foot" :style="{backgroundColor: backgroundcolor}">
                         <button class="button" v-on:click="showEntry = false">Close</button>
@@ -67,7 +83,15 @@ export default {
             this.currentImg = this.pokemon.front;
             this.currentShiny = this.pokemon.frontShiny;
             this.pokemon.dexNumber = res.data.id;
+            // console.log(res.data.stats);
+            // console.log(res.data.stats.length);
 
+            for (let index = 0; index < res.data.stats.length; index++) {
+                this.pokemon.base_stats_name[index] = res.data.stats[index].stat.name;
+                // console.log(this.pokemon.base_stats_name[index]);
+                this.pokemon.base_stats[index] = res.data.stats[index].base_stat;
+                // console.log(this.pokemon.base_stats[index]);
+            }
 
             axios.get(res.data.species.url).then(res => {
                 for (let index = 0; index < res.data.flavor_text_entries.length; index++) {
@@ -99,27 +123,29 @@ export default {
                 backShiny: '',
                 description: '',
                 dexNumber: '',
-                generation: ''
+                generation: '',
+                base_stats_name: [],
+                base_stats: [],
             },
             tiposCor: {
-                    normal: "#A8A878",
-                    fighting: "#C03028",
-                    flying: "#A890F0",
-                    electric: "#F8D030",
-                    ground: "#E0C068",
-                    psychic: "#F85888",
-                    rock: "#B8A038",
-                    ice: "#98D8D8",
-                    dragon: "#7038F8",
-                    ghost: "#705898",
-                    dark: "#705848",
-                    steel: "#B8B8D0",
-                    fairy: "#EE99AC",
-                    grass: "#78C850",
-                    fire: "#F08030",
-                    water: "#6890F0",
-                    poison: "#A040A0",
-                    bug: "#A8B820",
+                normal: "#A8A878",
+                fighting: "#C03028",
+                flying: "#A890F0",
+                electric: "#F8D030",
+                ground: "#E0C068",
+                psychic: "#F85888",
+                rock: "#B8A038",
+                ice: "#98D8D8",
+                dragon: "#7038F8",
+                ghost: "#705898",
+                dark: "#705848",
+                steel: "#B8B8D0",
+                fairy: "#EE99AC",
+                grass: "#78C850",
+                fire: "#F08030",
+                water: "#6890F0",
+                poison: "#A040A0",
+                bug: "#A8B820",
             }
         }
     },
