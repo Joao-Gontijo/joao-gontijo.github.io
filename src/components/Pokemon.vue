@@ -39,6 +39,7 @@
                             {{pokemon.description}}
                             </div>
                             <div class="column">
+                                <label>Base Stats</label>
                             <table class="table is-bordered">
                                 <tr>
                                     <th v-for="index in pokemon.base_stats_name" :key="index">
